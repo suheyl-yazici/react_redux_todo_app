@@ -1,20 +1,20 @@
 import React from 'react'
 import { useState } from 'react';
-// import {useDispatch} from "react-redux";
-
+import {useDispatch} from "react-redux";
+import { addTodo } from '../redux/actions/todoActions'; 
 
 
 const TodoInput = () => {
   const [text, setText] = useState("")
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setText("");
+    dispatch(addTodo(text))
   };
 
   return (
-    <div>
       <form onSubmit={handleSubmit}>
         <input 
         className='todo-input'
@@ -23,9 +23,8 @@ const TodoInput = () => {
         value={text}
         onChange={(e) => setText(e.target.value)}
         />
-        <button className='ad-button' onClick={handleSubmit}>Add</button>
+        <button className='add-button' onClick={handleSubmit}>Add</button>
       </form>
-    </div>
   )
 }
 
